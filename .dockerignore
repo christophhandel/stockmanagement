@@ -2,4 +2,12 @@
 !target/*-runner
 !target/*-runner.jar
 !target/lib/*
-!target/quarkus-app/*
+!target/quarkus-app/*!/application.properties
+
+!/datasource.txt
+
+!/derbydb-create.sh
+
+!/derbydb-start.sh
+
+!/download-derbydb-and-jdk.sh

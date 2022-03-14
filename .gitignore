@@ -37,3 +37,13 @@ nb-configuration.xml
 
 # Local environment
 .env
+db/
+!/application.properties
+
+!/datasource.txt
+
+!/derbydb-create.sh
+
+!/derbydb-start.sh
+
+!/download-derbydb-and-jdk.sh
