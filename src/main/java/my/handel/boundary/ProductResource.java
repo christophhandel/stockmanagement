@@ -9,10 +9,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @RequestScoped
-@Path("add")
+@Path("")
 public class ProductResource {
 
     @Inject
@@ -20,26 +21,21 @@ public class ProductResource {
 
     @CheckedTemplate
     public static class Templates {
-        //public static native TemplateInstance product(Product product);
         public static native TemplateInstance products(List<Product> products);
         public static native TemplateInstance addProduct(List<Product> products);
         public static native TemplateInstance error(String msg);
     }
 
 
-/*
     @GET
-    @Path("{id}")
+    @Path("all")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance get(@PathParam("id") long id) {
-        Product product = productRepository.findById(id);
-        return Templates.product(product);
+    public TemplateInstance allProducts() {
+        return Templates.products(productRepository.findAll().list());
     }
 
- */
-
-
     @GET
+    @Path("add")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance addProduct() {
         return Templates.addProduct(
@@ -52,7 +48,4 @@ public class ProductResource {
     public TemplateInstance showError(String message) {
         return Templates.error(message);
     }
-
-
-
 }

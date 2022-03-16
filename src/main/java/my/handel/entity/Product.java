@@ -26,17 +26,18 @@ public class Product extends PanacheEntityBase {
     @Column(name = "COUNT")
     public int count;
 
-    //@Column(name = "EXPIRATIONDATE")
-    //private Date expirationDate;
+    @Column(name = "EXPIRATIONDATE")
+    public LocalDate expirationDate;
 
     //region Constructor
     public Product() {
     }
 
-    public Product(String name, String category, int count) {
+    public Product(String name, String category, int count, LocalDate date) {
         this.name = name;
         this.category = category;
         this.count = count;
+        this.expirationDate = date;
     }
 //endregion
 
@@ -44,8 +45,4 @@ public class Product extends PanacheEntityBase {
     public String toString() {
         return "Product: "+ name + ", category='" + category +", "+ count +"count "+", expirationDate ";
     }
-    /*
-     <label for="expirationDate">Expiry Date:</label><br>
-    <input type="date" id="expirationDate" name="expirationDate"><br><br>
-     */
 }

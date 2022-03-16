@@ -12,6 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Transactional
 @Path("api/product")
@@ -51,9 +54,12 @@ public class ProductApi
             , @FormParam("name") String name
             , @FormParam("category") String category
             , @FormParam("count") int count
+            , @FormParam("expirationDate") String date
     ) {
         try {
-            Product newProduct = new Product(name,category,count);
+            LocalDate newDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+
+            Product newProduct = new Product(name,category,count,newDate);
             productRepository.persist(newProduct);
         } catch (Exception e) {
             LOG.error("Exception '" + e.getMessage() + "' raised");
