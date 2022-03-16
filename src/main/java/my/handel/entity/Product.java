@@ -15,16 +15,16 @@ public class Product extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int Id;
+    public int Id;
 
     @Column(name = "NAME")
-    private String name;
+    public String name;
 
     @Column(name = "CATEGORY")
-    private String category;
+    public String category;
 
     @Column(name = "COUNT")
-    private int count;
+    public int count;
 
     //@Column(name = "EXPIRATIONDATE")
     //private Date expirationDate;

@@ -7,14 +7,25 @@
 </head>
 <body>
 <form action="/api/product" method="post" name="productForm" enctype="application/x-www-form-urlencoded">
+
+    <label for="product">Product</label>
+    <select name="product" id="product">
+        <option disabled value="">Product</option>
+        {#for product in products}
+            <option value="{product}">{product}</option>
+        {/for}
+    </select>
+    <br>
+    <br>
+    <br>
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name"><br>
     <label for="category">Category:</label><br>
     <input type="text" id="category" name="category"><br><br>
     <label for="count">Count:</label><br>
     <input type="number" id="count" name="count"><br><br>
+    <button type="submit">Create</button>
 
-    <input type="submit" value="Hinzufügen">
 </form>
 </body>
 </html>

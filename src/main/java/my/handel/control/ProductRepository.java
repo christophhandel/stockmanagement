@@ -9,11 +9,4 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class ProductRepository implements PanacheRepository<Product>{
 
-    @Inject
-    ProductRepository productRepository;
-
-    public Product getProductByName(String name){
-        return productRepository.find("select p from Product p where p.name:=name",name).singleResult();
-    }
-
 }

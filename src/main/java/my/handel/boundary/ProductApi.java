@@ -12,29 +12,36 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Transactional
-@Path("product")
+@Path("api/product")
 public class ProductApi
 {
-
     @Inject
-    ProductRepository productRepository;
+    Logger LOG;
 
     @Inject
     ProductResource productResource;
 
-    Logger LOG;
+    @Inject
+    ProductRepository productRepository;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response GetAll(){
-        return Response.ok(productRepository.findAll()).build();
+    public Response findAll() {
+        return Response
+                .ok(productRepository.findAll().list()).build();
     }
 
+    /**
+     * vehicle=2&person=3&from_date=2023-01-01&to_date=2023-01-10
+     *
+     * Rückgabe einer TemplateInstance innerhalb einer Response
+     *  - https://www.programcreek.com/java-api-examples/?api=io.quarkus.qute.TemplateInstance
+     *  - Example 2
+     *
+     * @return redirect auf index.html oder error page
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -45,32 +52,11 @@ public class ProductApi
             , @FormParam("category") String category
             , @FormParam("count") int count
     ) {
-        Product product = productRepository.getProductByName(name);
-
-        if (product == null) {
-            String message = "Product is mandatory for crating";
-
-            /*return Response
-                    .status(Response.Status.OK)
-                    .entity(productResource.showError(e.getMessage()))
-                    .type(MediaType.TEXT_HTML)
-                    .build();
-
-             */
-        }
-
         try {
-            Product newProduct = new Product(name, category, count);
+            Product newProduct = new Product(name,category,count);
             productRepository.persist(newProduct);
         } catch (Exception e) {
             LOG.error("Exception '" + e.getMessage() + "' raised");
-            /*return Response
-                    .status(Response.Status.OK)
-                    .entity(productResource.showError(e.getMessage()))
-                    .type(MediaType.TEXT_HTML)
-                    .build();
-
-             */
         }
         return Response.status(301)
                 .location(URI.create("/"))

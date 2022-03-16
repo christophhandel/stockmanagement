@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="webjars/milligram/1.3.0/dist/milligram.min.css"/>
+    <title>Products</title>
+</head>
+<body>
+<select name="choose-vehicles">
+    <option disabled value="">Product</option>
+    {#for product in products}
+        <option value="{product}">{product}</option>
+    {/for}
+</select>
+</body>
+</html>
